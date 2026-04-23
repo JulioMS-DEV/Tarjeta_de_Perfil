@@ -35,101 +35,118 @@ fun ProfileScreen() {
         Text(
             text = "Perfil de Usuario",
             style = MaterialTheme.typography.headlineMedium,
-            fontWeight = FontWeight.Bold
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.colorScheme.primary
         )
 
         Spacer(modifier = Modifier.height(24.dp))
 
-        // Imagen de Perfil en un Box
-        Box(
-            modifier = Modifier
-                .size(120.dp)
-                .clip(CircleShape)
-                .background(Color.LightGray),
-            contentAlignment = Alignment.Center
-        ) {
-            Icon(
-                imageVector = Icons.Default.Person,
-                contentDescription = "Foto de perfil",
-                modifier = Modifier.size(80.dp),
-                tint = Color.Gray
-            )
-            // Superposición de texto (Ejercicio adicional)
-            Box(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(bottom = 8.dp),
-                contentAlignment = Alignment.BottomCenter
-            ) {
-                Text(
-                    text = "ONLINE",
-                    color = Color.Green,
-                    fontSize = 10.sp,
-                    fontWeight = FontWeight.Bold,
-                    modifier = Modifier.background(Color.Black.copy(alpha = 0.5f), RoundedCornerShape(4.dp)).padding(horizontal = 4.dp)
-                )
-            }
-        }
-
-        Spacer(modifier = Modifier.height(16.dp))
-
-        // Nombre del usuario con icono
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(8.dp)
-        ) {
-            Text(
-                text = "Julio Mendez",
-                fontSize = 22.sp,
-                fontWeight = FontWeight.SemiBold
-            )
-            Icon(
-                imageVector = Icons.Default.CheckCircle,
-                contentDescription = "Verificado",
-                tint = Color(0xFF2196F3),
-                modifier = Modifier.size(20.dp)
-            )
-        }
-
-        Spacer(modifier = Modifier.height(8.dp))
-
-        // Descripción
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(4.dp)
-        ) {
-            Text(
-                text = "Desarrollador Android Senior",
-                color = Color.Gray,
-                fontSize = 16.sp
-            )
-            Text(
-                text = "Managua, Nicaragua",
-                color = Color.LightGray,
-                fontSize = 14.sp
-            )
-        }
-
-        Spacer(modifier = Modifier.height(24.dp))
-
-        // Botones de acción
-        Row(
+        // Ejercicio adicional: Disposición en Fila (Imagen + Información)
+        Card(
             modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceEvenly
+            shape = RoundedCornerShape(12.dp),
+            elevation = CardDefaults.cardElevation(4.dp),
+            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.3f))
         ) {
-            Button(onClick = { /* TODO */ }) {
-                Text("Seguir")
-            }
-            OutlinedButton(onClick = { /* TODO */ }) {
-                Icon(Icons.Default.Email, contentDescription = null)
-                Spacer(Modifier.width(8.dp))
-                Text("Mensaje")
+            Row(
+                modifier = Modifier
+                    .padding(16.dp)
+                    .fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(16.dp)
+            ) {
+                // Imagen de Perfil en un Box (Pauta: Box para control de alineación)
+                Box(
+                    modifier = Modifier
+                        .size(80.dp)
+                        .clip(CircleShape)
+                        .background(MaterialTheme.colorScheme.primaryContainer),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.Person,
+                        contentDescription = "Foto de perfil",
+                        modifier = Modifier.size(50.dp),
+                        tint = MaterialTheme.colorScheme.primary
+                    )
+                    // Superposición de texto (Ejercicio adicional)
+                    Box(
+                        modifier = Modifier.fillMaxSize(),
+                        contentAlignment = Alignment.BottomCenter
+                    ) {
+                        Text(
+                            text = "ACTIVO",
+                            color = Color.White,
+                            fontSize = 8.sp,
+                            fontWeight = FontWeight.Bold,
+                            modifier = Modifier
+                                .background(Color(0xFF4CAF50), RoundedCornerShape(4.dp))
+                                .padding(horizontal = 4.dp, vertical = 1.dp)
+                        )
+                    }
+                }
+
+                // Información del usuario (Nombre + Descripción)
+                Column(
+                    verticalArrangement = Arrangement.spacedBy(4.dp)
+                ) {
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.spacedBy(4.dp)
+                    ) {
+                        Text(
+                            text = "Julio Mendez",
+                            fontSize = 18.sp,
+                            fontWeight = FontWeight.Bold
+                        )
+                        Icon(
+                            imageVector = Icons.Default.CheckCircle,
+                            contentDescription = "Verificado",
+                            tint = Color(0xFF2196F3),
+                            modifier = Modifier.size(16.dp)
+                        )
+                    }
+                    Text(
+                        text = "Desarrollador Android Senior",
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        fontSize = 14.sp
+                    )
+                    Text(
+                        text = "Managua, Nicaragua",
+                        color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.7f),
+                        fontSize = 12.sp
+                    )
+                }
             }
         }
 
         Spacer(modifier = Modifier.height(32.dp))
-        HorizontalDivider()
+
+        // Botones de acción (Rec 2: Distribuidos a lo ancho)
+        Row(
+            modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp),
+            horizontalArrangement = Arrangement.spacedBy(16.dp)
+        ) {
+            Button(
+                onClick = { /* TODO */ },
+                modifier = Modifier.weight(1f),
+                colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary)
+            ) {
+                Text("Seguir", fontWeight = FontWeight.Bold)
+            }
+            OutlinedButton(
+                onClick = { /* TODO */ },
+                modifier = Modifier.weight(1f)
+            ) {
+                Icon(Icons.Default.Email, contentDescription = null, tint = MaterialTheme.colorScheme.primary)
+                Spacer(Modifier.width(8.dp))
+                Text("Mensaje", color = MaterialTheme.colorScheme.primary)
+            }
+        }
+
         Spacer(modifier = Modifier.height(32.dp))
+        HorizontalDivider(color = Color.LightGray.copy(alpha = 0.5f))
+        Spacer(modifier = Modifier.height(32.dp)) // Aire entre línea y tarjeta (Rec 1)
 
         // Reto: Tarjeta estilo red social
         SocialMediaCard()
@@ -140,51 +157,83 @@ fun ProfileScreen() {
 fun SocialMediaCard() {
     Card(
         modifier = Modifier
-            .fillMaxWidth(),
-        shape = RoundedCornerShape(12.dp),
-        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
+            .fillMaxWidth()
+            .padding(horizontal = 4.dp),
+        shape = RoundedCornerShape(16.dp),
+        elevation = CardDefaults.cardElevation(defaultElevation = 6.dp),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface)
     ) {
         Column {
-            // Imagen principal (Simulada con un Box de color)
+            // Cabecera de la publicación (Rec 5)
+            Row(
+                modifier = Modifier.padding(12.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Icon(Icons.Default.Person, contentDescription = null, modifier = Modifier.size(32.dp), tint = Color.Gray)
+                Spacer(modifier = Modifier.width(8.dp))
+                Column {
+                    Text(text = "Julio Mendez", fontWeight = FontWeight.Bold, fontSize = 14.sp)
+                    Text(text = "Hace 2 h", fontSize = 12.sp, color = Color.Gray)
+                }
+            }
+
+            // Imagen principal (Rec 6: Placeholder más trabajado)
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(200.dp)
-                    .background(Color.DarkGray),
+                    .padding(horizontal = 12.dp)
+                    .clip(RoundedCornerShape(8.dp))
+                    .background(Color(0xFFE0F7FA)), // Color suave
                 contentAlignment = Alignment.Center
             ) {
-                Text("Imagen de Publicación", color = Color.White)
+                Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                    Icon(Icons.Default.Person, contentDescription = null, modifier = Modifier.size(48.dp), tint = Color(0xFF00ACC1))
+                    Spacer(modifier = Modifier.height(8.dp))
+                    Text("Imagen de Publicación", color = Color(0xFF007C91), fontWeight = FontWeight.Medium)
+                }
             }
 
-            // Texto descriptivo
+            // Texto descriptivo (Rec 4: Coherencia de colores)
             Column(modifier = Modifier.padding(12.dp)) {
                 Text(
                     text = "¡Hoy aprendiendo Jetpack Compose!",
                     fontWeight = FontWeight.Bold,
-                    fontSize = 16.sp
+                    fontSize = 16.sp,
+                    color = MaterialTheme.colorScheme.onSurface
                 )
+                Spacer(modifier = Modifier.height(4.dp))
                 Text(
                     text = "Explorando el poder de los layouts en Android. #AndroidDev #Compose",
                     fontSize = 14.sp,
-                    color = Color.Gray
+                    color = Color.DarkGray
                 )
             }
 
-            // Fila de botones
+            HorizontalDivider(color = Color.LightGray.copy(alpha = 0.3f))
+
+            // Fila de botones (Rec 5 y Rec 7: Iconos con texto y bien alineados)
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 8.dp, vertical = 4.dp),
-                horizontalArrangement = Arrangement.SpaceBetween
+                    .padding(horizontal = 8.dp, vertical = 6.dp),
+                horizontalArrangement = Arrangement.SpaceEvenly,
+                verticalAlignment = Alignment.CenterVertically
             ) {
-                IconButton(onClick = { /* TODO */ }) {
-                    Icon(Icons.Default.Favorite, contentDescription = "Like", tint = Color.Red)
+                TextButton(onClick = { /* TODO */ }) {
+                    Icon(Icons.Default.Favorite, contentDescription = "Like", tint = Color.Red, modifier = Modifier.size(18.dp))
+                    Spacer(modifier = Modifier.width(4.dp))
+                    Text("Me gusta", color = Color.Gray)
                 }
-                IconButton(onClick = { /* TODO */ }) {
-                    Icon(Icons.Default.CheckCircle, contentDescription = "Comentar")
+                TextButton(onClick = { /* TODO */ }) {
+                    Icon(Icons.Default.CheckCircle, contentDescription = "Comentar", tint = Color.Gray, modifier = Modifier.size(18.dp))
+                    Spacer(modifier = Modifier.width(4.dp))
+                    Text("Comentar", color = Color.Gray)
                 }
-                IconButton(onClick = { /* TODO */ }) {
-                    Icon(Icons.Default.Share, contentDescription = "Compartir")
+                TextButton(onClick = { /* TODO */ }) {
+                    Icon(Icons.Default.Share, contentDescription = "Compartir", tint = Color.Gray, modifier = Modifier.size(18.dp))
+                    Spacer(modifier = Modifier.width(4.dp))
+                    Text("Compartir", color = Color.Gray)
                 }
             }
         }
